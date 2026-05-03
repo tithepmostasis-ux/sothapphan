@@ -85,84 +85,117 @@
 
     <style id="mobile-hardening-css">
         html, body {
-            width: 100%;
-            height: 100dvh;
-            min-height: 100dvh;
-            margin: 0;
-            overflow: hidden;
-            overscroll-behavior: none;
-            -webkit-text-size-adjust: 100%;
+            width: 100% !important;
+            min-width: 0 !important;
+            min-height: 100dvh !important;
+            height: 100dvh !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            overscroll-behavior: none !important;
+            -webkit-text-size-adjust: 100% !important;
+            touch-action: pan-y !important;
         }
 
         #hub-map {
-            min-height: 100dvh;
-            max-height: 100dvh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: max(1rem, env(safe-area-inset-bottom));
+            position: fixed !important;
+            inset: 0 !important;
+            width: 100vw !important;
+            height: 100dvh !important;
+            max-height: 100dvh !important;
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+            -webkit-overflow-scrolling: touch !important;
+            touch-action: pan-y !important;
+            overscroll-behavior-y: contain !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            padding-bottom: calc(120px + env(safe-area-inset-bottom)) !important;
+        }
+
+        #hub-map header {
+            flex: 0 0 auto !important;
+        }
+
+        #hub-map .grid {
+            flex: 0 0 auto !important;
+            min-height: auto !important;
+            align-content: start !important;
         }
 
         #game-overlay {
-            width: 100vw;
-            height: 100dvh;
-            max-height: 100dvh;
-            overflow: hidden;
+            position: fixed !important;
+            inset: 0 !important;
+            width: 100vw !important;
+            height: 100dvh !important;
+            max-height: 100dvh !important;
+            overflow: hidden !important;
+            touch-action: none !important;
         }
 
         #game-overlay > .h-12 {
-            height: 48px !important;
-            min-height: 48px !important;
-            padding-left: max(0.75rem, env(safe-area-inset-left));
-            padding-right: max(0.75rem, env(safe-area-inset-right));
+            height: 50px !important;
+            min-height: 50px !important;
+            max-height: 50px !important;
+            flex: 0 0 50px !important;
+            padding-left: max(0.75rem, env(safe-area-inset-left)) !important;
+            padding-right: max(0.75rem, env(safe-area-inset-right)) !important;
         }
 
         #game-frame {
-            height: calc(100dvh - 48px) !important;
+            display: block !important;
+            width: 100% !important;
+            height: calc(100dvh - 50px) !important;
             min-height: 0 !important;
-            display: block;
+            flex: 1 1 auto !important;
+            border: 0 !important;
         }
 
         @media (max-width: 768px) {
             #hub-map {
-                padding: 0.75rem !important;
-                gap: 0.75rem;
+                padding: max(0.75rem, env(safe-area-inset-top)) 0.75rem calc(130px + env(safe-area-inset-bottom)) !important;
             }
 
             #hub-map header {
-                margin-bottom: 0.75rem !important;
+                width: 100% !important;
+                margin-bottom: 0.85rem !important;
                 padding: 0.65rem !important;
                 border-radius: 1.25rem !important;
-                position: sticky;
-                top: 0;
-                z-index: 20;
+                position: sticky !important;
+                top: max(0px, env(safe-area-inset-top)) !important;
+                z-index: 20 !important;
             }
 
             #hub-map header h1 {
                 font-size: clamp(1.05rem, 6vw, 1.55rem) !important;
-                line-height: 1.05 !important;
-                letter-spacing: 0.04em !important;
+                line-height: 1.08 !important;
+                letter-spacing: 0.035em !important;
             }
 
             #hub-map header p {
                 font-size: 0.72rem !important;
-                line-height: 1.1 !important;
+                line-height: 1.12 !important;
             }
 
             #hub-map .grid {
+                display: grid !important;
                 grid-template-columns: 1fr !important;
-                gap: 0.85rem !important;
-                align-content: start !important;
-                padding-bottom: 1rem;
+                gap: 0.9rem !important;
+                width: 100% !important;
+                max-width: 42rem !important;
+                padding-bottom: 2rem !important;
+                margin-bottom: 1rem !important;
             }
 
             .card-station {
                 border-radius: 1.35rem !important;
                 padding: 1rem !important;
-                min-height: 132px;
+                min-height: 138px !important;
+                width: 100% !important;
             }
 
             .card-station h2 {
                 font-size: 1.45rem !important;
+                line-height: 1.05 !important;
                 margin-bottom: 0.25rem !important;
             }
 
@@ -179,8 +212,8 @@
             }
 
             #hub-auth-modal {
-                min-height: 100dvh;
-                padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
+                min-height: 100dvh !important;
+                padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom)) !important;
             }
 
             #hub-auth-modal .max-w-md {
@@ -188,13 +221,15 @@
                 padding: 1.25rem !important;
             }
 
-            #game-overlay .h-12 {
-                height: 46px !important;
-                min-height: 46px !important;
+            #game-overlay > .h-12 {
+                height: 48px !important;
+                min-height: 48px !important;
+                max-height: 48px !important;
+                flex-basis: 48px !important;
             }
 
             #game-frame {
-                height: calc(100dvh - 46px) !important;
+                height: calc(100dvh - 48px) !important;
             }
 
             #playing-title {
@@ -205,6 +240,18 @@
             #game-overlay button {
                 font-size: 0.78rem !important;
                 padding: 0.38rem 0.55rem !important;
+                white-space: nowrap !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            #hub-map .grid {
+                gap: 0.7rem !important;
+            }
+
+            .card-station {
+                min-height: 126px !important;
+                padding: 0.85rem !important;
             }
         }
     </style>
@@ -4104,6 +4151,8 @@
                     setTimeout(() => {
                         authModal.style.display = 'none';
                         mapHub.classList.remove('opacity-0', 'pointer-events-none');
+                        fixHubMobileScroll();
+                        setTimeout(fixHubMobileScroll, 150);
                     }, 300);
                     
                 } else {
@@ -4155,7 +4204,7 @@
             // - ẩn/xóa màn nhập mật khẩu của trạm con
             // - truyền API key đã giải mã từ web chính vào biến gcpApiKey của trạm con
             // - gọi initApp() để trạm chạy ngay
-            // - thêm CSS/JS chống khuất, chống lấp nút, chống tràn giao diện trên mobile
+            // - chống khuất/lấp nút, bật cuộn nội dung trong từng trạm trên mobile
             const apiLiteral = JSON.stringify(extractedApiKey || "");
 
             const bypassHeadCode = [
@@ -4164,11 +4213,13 @@
                 "    width: 100% !important;",
                 "    min-width: 0 !important;",
                 "    max-width: 100vw !important;",
-                "    min-height: 100dvh !important;",
                 "    height: 100dvh !important;",
+                "    min-height: 100dvh !important;",
+                "    max-height: 100dvh !important;",
                 "    overflow: hidden !important;",
                 "    overscroll-behavior: none !important;",
                 "    -webkit-text-size-adjust: 100% !important;",
+                "    touch-action: pan-y !important;",
                 "}",
                 "#auth-modal {",
                 "    display: none !important;",
@@ -4185,6 +4236,15 @@
                 "    overflow-y: auto !important;",
                 "    overflow-x: hidden !important;",
                 "    -webkit-overflow-scrolling: touch !important;",
+                "    touch-action: pan-y !important;",
+                "    overscroll-behavior-y: contain !important;",
+                "}",
+                "#app-container * {",
+                "    max-width: 100%;",
+                "}",
+                "input, button, select, textarea {",
+                "    max-width: 100% !important;",
+                "    touch-action: manipulation !important;",
                 "}",
                 "#teacher-modal, .teacher-modal {",
                 "    padding: max(0.5rem, env(safe-area-inset-top)) 0.5rem max(0.5rem, env(safe-area-inset-bottom)) !important;",
@@ -4206,9 +4266,9 @@
                 "        top: 0 !important;",
                 "        padding: 0.35rem 0.45rem !important;",
                 "        min-height: 48px !important;",
-                "        max-height: 64px !important;",
+                "        max-height: 68px !important;",
                 "        z-index: 999 !important;",
-                "        background: rgba(255,255,255,0.92) !important;",
+                "        background: rgba(255,255,255,0.94) !important;",
                 "        backdrop-filter: blur(10px) !important;",
                 "        overflow: visible !important;",
                 "    }",
@@ -4220,9 +4280,9 @@
                 "        position: fixed !important;",
                 "    }",
                 "    body > .fixed.top-0 + #app-container {",
-                "        margin-top: 58px !important;",
-                "        height: calc(100dvh - 58px) !important;",
-                "        max-height: calc(100dvh - 58px) !important;",
+                "        margin-top: var(--hub-child-offset, 58px) !important;",
+                "        height: calc(100dvh - var(--hub-child-offset, 58px)) !important;",
+                "        max-height: calc(100dvh - var(--hub-child-offset, 58px)) !important;",
                 "    }",
                 "    body > header + #app-container, body > header + main#app-container {",
                 "        margin-top: 0 !important;",
@@ -4237,19 +4297,28 @@
                 "        margin-right: 0 !important;",
                 "        width: 100% !important;",
                 "    }",
-                "    #app-container .flex-1 { min-height: 0 !important; }",
-                "    .speech-bubble { max-width: 92vw !important; }",
-                "    input, button, select, textarea { max-width: 100% !important; }",
-                "    .grid { max-width: 100% !important; }",
+                "    #app-container .flex-1 {",
+                "        min-height: 0 !important;",
+                "    }",
+                "    .speech-bubble {",
+                "        max-width: 92vw !important;",
+                "    }",
+                "    .grid, .flex {",
+                "        min-width: 0 !important;",
+                "    }",
                 "}",
                 "@media (max-width: 480px) {",
-                "    body > .fixed.top-0, body > header { min-height: 44px !important; }",
-                "    body > .fixed.top-0 + #app-container {",
-                "        margin-top: 52px !important;",
-                "        height: calc(100dvh - 52px) !important;",
-                "        max-height: calc(100dvh - 52px) !important;",
+                "    body > .fixed.top-0, body > header {",
+                "        min-height: 44px !important;",
                 "    }",
-                "    #app-container { border-radius: 10px !important; }",
+                "    body > .fixed.top-0 + #app-container {",
+                "        margin-top: var(--hub-child-offset-small, 52px) !important;",
+                "        height: calc(100dvh - var(--hub-child-offset-small, 52px)) !important;",
+                "        max-height: calc(100dvh - var(--hub-child-offset-small, 52px)) !important;",
+                "    }",
+                "    #app-container {",
+                "        border-radius: 10px !important;",
+                "    }",
                 "}",
                 "</style>"
             ].join("\\n");
@@ -4264,18 +4333,24 @@
                 "        const header = document.querySelector('body > header') || document.querySelector('body > .fixed.top-0');",
                 "        if (!app) return;",
                 "        const mobile = window.matchMedia('(max-width: 768px)').matches;",
+                "        app.style.overflowY = 'auto';",
+                "        app.style.overflowX = 'hidden';",
+                "        app.style.webkitOverflowScrolling = 'touch';",
+                "        app.style.touchAction = 'pan-y';",
                 "        if (!mobile) return;",
                 "        let h = 0;",
                 "        if (header) {",
                 "            const rect = header.getBoundingClientRect();",
                 "            h = Math.max(44, Math.ceil(rect.height || 56));",
                 "            setVar('--hub-child-header-height', h + 'px');",
+                "            setVar('--hub-child-offset', (h + 8) + 'px');",
+                "            setVar('--hub-child-offset-small', (h + 6) + 'px');",
                 "        }",
                 "        const isFixed = header && getComputedStyle(header).position === 'fixed';",
                 "        if (isFixed) {",
-                "            app.style.marginTop = (h + 6) + 'px';",
-                "            app.style.height = 'calc(100dvh - ' + (h + 6) + 'px)';",
-                "            app.style.maxHeight = 'calc(100dvh - ' + (h + 6) + 'px)';",
+                "            app.style.marginTop = (h + 8) + 'px';",
+                "            app.style.height = 'calc(100dvh - ' + (h + 8) + 'px)';",
+                "            app.style.maxHeight = 'calc(100dvh - ' + (h + 8) + 'px)';",
                 "        } else if (header) {",
                 "            app.style.marginTop = '0px';",
                 "            app.style.height = 'calc(100dvh - ' + h + 'px)';",
@@ -4284,9 +4359,10 @@
                 "            app.style.height = '100dvh';",
                 "            app.style.maxHeight = '100dvh';",
                 "        }",
-                "        app.style.overflowY = 'auto';",
-                "        app.style.overflowX = 'hidden';",
-                "        app.style.webkitOverflowScrolling = 'touch';",
+                "        Array.from(document.querySelectorAll('#app-container, #app-container [class*=overflow], #app-container .overflow-y-auto, #app-container .overflow-auto')).forEach(function(el){",
+                "            el.style.webkitOverflowScrolling = 'touch';",
+                "            el.style.touchAction = 'pan-y';",
+                "        });",
                 "    }",
                 "    function bootFromHub(){",
                 "        if (window.__ROBO_PHAY_HUB_BOOTED__) { mobileLayoutFix(); return; }",
@@ -4297,8 +4373,9 @@
                 "        if (modal) { modal.remove(); }",
                 "        if (typeof initApp === 'function') { initApp(); }",
                 "        setTimeout(mobileLayoutFix, 0);",
-                "        setTimeout(mobileLayoutFix, 150);",
-                "        setTimeout(mobileLayoutFix, 450);",
+                "        setTimeout(mobileLayoutFix, 120);",
+                "        setTimeout(mobileLayoutFix, 350);",
+                "        setTimeout(mobileLayoutFix, 800);",
                 "    }",
                 "    if (document.readyState === 'loading') {",
                 "        document.addEventListener('DOMContentLoaded', bootFromHub, { once: true });",
@@ -4307,7 +4384,13 @@
                 "    }",
                 "    window.addEventListener('load', bootFromHub, { once: true });",
                 "    window.addEventListener('resize', mobileLayoutFix);",
-                "    window.addEventListener('orientationchange', function(){ setTimeout(mobileLayoutFix, 250); });",
+                "    window.addEventListener('orientationchange', function(){ setTimeout(mobileLayoutFix, 250); setTimeout(mobileLayoutFix, 650); });",
+                "    document.addEventListener('click', function(){ setTimeout(mobileLayoutFix, 30); }, true);",
+                "    document.addEventListener('touchstart', function(){ setTimeout(mobileLayoutFix, 30); }, {passive:true, capture:true});",
+                "    if (window.MutationObserver) {",
+                "        const mo = new MutationObserver(function(){ mobileLayoutFix(); });",
+                "        setTimeout(function(){ const app = document.getElementById('app-container'); if (app) mo.observe(app, {childList:true, subtree:true, attributes:true}); }, 300);",
+                "    }",
                 "    if (window.ResizeObserver) {",
                 "        const ro = new ResizeObserver(function(){ mobileLayoutFix(); });",
                 "        setTimeout(function(){",
@@ -4337,6 +4420,8 @@
 
             // Mở Iframe Overlay
             gameOverlay.classList.remove('hidden-overlay');
+            resizeGameFrameMobileSafe();
+            setTimeout(resizeGameFrameMobileSafe, 150);
             
             // Ghi mã đã bơm vào iframe
             gameFrame.srcdoc = injectedCode;
@@ -4346,17 +4431,40 @@
         }
 
 
+        function fixHubMobileScroll() {
+            try {
+                if (mapHub) {
+                    mapHub.style.position = 'fixed';
+                    mapHub.style.inset = '0';
+                    mapHub.style.height = '100dvh';
+                    mapHub.style.maxHeight = '100dvh';
+                    mapHub.style.overflowY = 'scroll';
+                    mapHub.style.overflowX = 'hidden';
+                    mapHub.style.webkitOverflowScrolling = 'touch';
+                    mapHub.style.touchAction = 'pan-y';
+                    mapHub.style.justifyContent = 'flex-start';
+                }
+                document.documentElement.style.height = '100dvh';
+                document.body.style.height = '100dvh';
+                document.body.style.overflow = 'hidden';
+            } catch (e) {}
+        }
+
         function resizeGameFrameMobileSafe() {
             try {
                 const topbar = gameOverlay.querySelector('.h-12');
-                const h = topbar ? Math.ceil(topbar.getBoundingClientRect().height || 48) : 48;
+                const h = topbar ? Math.ceil(topbar.getBoundingClientRect().height || 50) : 50;
                 gameOverlay.style.height = '100dvh';
+                gameOverlay.style.maxHeight = '100dvh';
+                gameOverlay.style.overflow = 'hidden';
                 gameFrame.style.height = 'calc(100dvh - ' + h + 'px)';
                 gameFrame.style.minHeight = '0';
+                gameFrame.style.width = '100%';
             } catch (e) {}
         }
-        window.addEventListener('resize', resizeGameFrameMobileSafe);
-        window.addEventListener('orientationchange', function(){ setTimeout(resizeGameFrameMobileSafe, 250); });
+        window.addEventListener('resize', function(){ fixHubMobileScroll(); resizeGameFrameMobileSafe(); });
+        window.addEventListener('orientationchange', function(){ setTimeout(function(){ fixHubMobileScroll(); resizeGameFrameMobileSafe(); }, 250); });
+        document.addEventListener('DOMContentLoaded', fixHubMobileScroll);
 
         // 3. Đóng Game và trở về màn hình Hub
         function closeGame() {
